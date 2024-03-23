@@ -1,5 +1,6 @@
 import http.client
 import json
+import ssl
 
 # Define el cuerpo de la solicitud en formato JSON
 data = {
@@ -15,8 +16,11 @@ json_data = json.dumps(data)
 url = "advana-challenge-check-api-cr-k4hdbggvoq-uc.a.run.app"
 endpoint = "/data-engineer"
 
+# Desactiva la verificación del certificado SSL
+context = ssl._create_unverified_context()
+
 # Establece la conexión con el servidor
-conn = http.client.HTTPSConnection(url)
+conn = http.client.HTTPSConnection(url, context=context)
 
 # Define las cabeceras de la solicitud
 headers = {'Content-type': 'application/json'}
